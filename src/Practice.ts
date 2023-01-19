@@ -88,3 +88,116 @@ let cartItems: {
     total: 6000,
   },
 ];
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+//enum
+enum Gender {
+  male = "Male",
+  female = "Female",
+}
+
+const gender1: Gender = Gender.female;
+
+//Tuple - exactly how many elements in an array?
+
+let arr: [number, string] = [1, "ayush"];
+(arr[0] = 5), "ayush";
+// arr[0]="ayush",5 error
+
+// Generics - A way of passing types to function along side parameters
+
+const getIdentity = <T>(arg: T): T => {
+  return arg;
+};
+
+let x: string = "hello";
+let y: number = 1;
+let z: boolean = true;
+
+getIdentity<string>(x);
+getIdentity<number>(y);
+getIdentity<boolean>(z);
+getIdentity(null);
+
+const useState = (arg: number): [number, (a: number) => void] => {
+  let v: typeof arg = arg;
+
+  const setV = (newValue: number): void => {
+    v = newValue;
+  };
+  return [v, setV];
+};
+
+//////////
+
+class Car {
+  chaiseNumber: number;
+  name: string;
+  constructor(chaiseNumber: number, name: string) {
+    this.chaiseNumber = chaiseNumber;
+    this.name = name;
+  }
+}
+
+type IndicaPlace = "Mumbai" | "factory1" | "factory2";
+type IndicaEngineCC = 1000 | 1500 | 2000;
+type IndicaTypeSizes = "18" | "22" | "26";
+
+class Indica extends Car {
+  fuelCapicity: number;
+  engineCC: IndicaEngineCC;
+  typeSizes: IndicaTypeSizes;
+  place: IndicaPlace;
+  constructor(
+    fuelCapicity: number,
+    engineCC: IndicaEngineCC,
+    typeSizes: IndicaTypeSizes,
+    place: IndicaPlace
+  ) {
+    super(Date.now(), "Indica");
+    this.place = place;
+    this.fuelCapicity = fuelCapicity;
+    this.engineCC = engineCC;
+    this.typeSizes = typeSizes;
+  }
+}
+
+let indica1 = new Indica(50, 1500, "18", "factory1")
+
+
+// Example
+
+type NexonPlace = "factory1" | "factory2";
+type NexonEngineCC = 1500 | 2000 | 2500;
+type NexonTyreSizes = "24" | "26";
+type NexonType="Petrol"|"Desiel"|"EV"
+
+class Nexon extends Car {
+  fuelCapicity?: number;
+  engineCC?: NexonEngineCC;
+  tyreSizes: NexonTyreSizes;
+  place: NexonPlace;
+  type: NexonType;
+  constructor(
+    tyreSize: NexonTyreSizes,
+    place: NexonPlace,
+    type: NexonType,
+    fuelCapicity?: number,
+    engineCC?: NexonEngineCC,
+    ) {
+    super(Date.now(), "Nexon");
+    this.place = place;
+    if(fuelCapicity){
+      this.fuelCapicity = fuelCapicity;
+    }
+    if(engineCC){
+      this.engineCC = engineCC;
+    }
+    this.tyreSizes = tyreSize;
+    this.type = type;
+  }
+    }
+
+let nexon1 = new Nexon("24","factory1","EV")
+
